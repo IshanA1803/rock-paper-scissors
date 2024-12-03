@@ -15,6 +15,9 @@ function getHumanChoice(){
     return prompt("Enter your choice")
 }
 function playRound(computerChoice,humanChoice){
+    if(humanChoice===null){
+        return
+    }
     humanChoice=humanChoice.toUpperCase();
     
     if(humanChoice===computerChoice){
@@ -43,12 +46,19 @@ function playRound(computerChoice,humanChoice){
             humanScore++
              return `You win! ${humanChoice} beats ${computerChoice} !`
         }
+    }else{
+        return "Invalid Entry"
     }
 }
 
 function playGame(){
     for(let i=0;i<5;++i){
-        console.log(playRound(getComputerChoice(),getHumanChoice()))
+        let result=playRound(getComputerChoice(),getHumanChoice())
+        if(result===undefined){
+            console.log("User decided to exit mid game")
+            return
+        }
+        console.log(result)
     }
     if(humanScore===computerScore){
         console.log("It's a DRAW !!!")
