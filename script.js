@@ -1,3 +1,5 @@
+let humanScore=0,computerScore=0;
+
 function getComputerChoice(){
     let randomNumber=Math.floor((Math.random()*3))+1
     if(randomNumber===1){
@@ -8,10 +10,53 @@ function getComputerChoice(){
         return "SCISSORS"
     }
 }
-console.log(getComputerChoice())
+
 function getHumanChoice(){
-    let humanChoice = prompt("Enter your choice")
-    humanChoice=humanChoice.toUpperCase();
-    return humanChoice
+    return prompt("Enter your choice")
 }
-console.log(getHumanChoice())
+function playRound(computerChoice,humanChoice){
+    humanChoice=humanChoice.toUpperCase();
+    
+    if(humanChoice===computerChoice){
+        return "It's a Draw !!"
+    }else if(humanChoice==="ROCK"){
+        if(computerChoice==="PAPER"){
+            computerScore++
+            return `You lose! ${computerChoice} beats ${humanChoice} !`
+        }else{
+            humanScore++
+             return `You win! ${humanChoice} beats ${computerChoice} !`
+        }
+    }else if(humanChoice==="PAPER"){
+        if(computerChoice==="SCISSORS"){
+            computerScore++
+            return `You lose! ${computerChoice} beats ${humanChoice} !`
+        }else{
+            humanScore
+             return `You win! ${humanChoice} beats ${computerChoice} !`
+        }
+    }else if(humanChoice==="SCISSORS"){
+        if(computerChoice==="ROCK"){
+            computerScore++
+            return `You lose! ${computerChoice} beats ${humanChoice} !`
+        }else{
+            humanScore++
+             return `You win! ${humanChoice} beats ${computerChoice} !`
+        }
+    }
+}
+
+function playGame(){
+    for(let i=0;i<5;++i){
+        console.log(playRound(getComputerChoice(),getHumanChoice()))
+    }
+    if(humanScore===computerScore){
+        console.log("It's a DRAW !!!")
+    }else if(humanScore<computerScore){
+        console.log("You LOSE !!!")
+    }else{
+        console.log("You WIN !!!")
+    }
+}
+
+playGame()
