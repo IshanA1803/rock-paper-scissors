@@ -1,13 +1,13 @@
 let humanScore=0,computerScore=0;
 
 function getComputerChoice(){
-    let randomNumber=Math.floor((Math.random()*3))+1
+    let randomNumber=Math.floor((Math.random()*3))+1;
     if(randomNumber===1){
-        return "ROCK"
+        return "ROCK";
     }else if(randomNumber===2){
-        return "PAPER"
+        return "PAPER";
     }else{
-        return "SCISSORS"
+        return "SCISSORS";
     }
 }
 
@@ -15,7 +15,7 @@ function playRound(computerChoice,humanChoice){
     humanChoice=humanChoice.toUpperCase();
     
     if(humanChoice===computerChoice){
-        return 0
+        return 0;
     }else if(humanChoice==="ROCK"){
         if(computerChoice==="PAPER"){
             computerScore++;
@@ -44,28 +44,27 @@ function playRound(computerChoice,humanChoice){
     }
 }
 
-const rock=document.querySelector("#rock");
-const paper=document.querySelector("#paper");
-const scissors=document.querySelector("#scissors");
-const buttons=document.querySelector("#buttons");
-
 buttons.addEventListener('click',function(event){
     console.log(event.target.id);
     let computerChoice=getComputerChoice();
     console.log(`Computer Choice : ${computerChoice}`)
     let score=playRound(computerChoice,event.target.id);
     const div=document.querySelector("#container");
+    const pre=document.createElement("pre");
     if(score===5){
-        div.textContent="CONGRATULATIONS! You WIN :)";
-        div.textContent+="Final Scores :";
-        div.textContent+=`Player Score : ${humanScore} Computer Score : ${computerScore}`
+        div.textContent='';
+        pre.textContent=`CONGRATULATIONS! You WIN :)\nFinal Scores :\nPlayer Score : ${humanScore}\tComputer Score : ${computerScore}`;
+        div.appendChild(pre);
         humanScore=0;computerScore=0;
     }else if(score===-5){
-        div.textContent="OOPS! You LOSE :(";
-        div.textContent+="Final Scores :";
-        div.textContent+=`Player Score : ${humanScore} Computer Score : ${computerScore}`
+        div.textContent='';
+        const pre=document.createElement("pre");
+        pre.textContent=`OOPS! You LOSE :)\nFinal Scores :\nPlayer Score : ${humanScore}\tComputer Score : ${computerScore}`;
+        div.appendChild(pre);
         humanScore=0;computerScore=0;
     }else{
-        div.textContent=`Player Score : ${humanScore} Computer Score : ${computerScore}`;
+        div.textContent="";
+        pre.textContent=`Player Score : ${humanScore}\tComputer Score : ${computerScore}`;
+        div.appendChild(pre);
     }
-})
+});
