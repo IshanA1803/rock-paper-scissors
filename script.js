@@ -11,62 +11,65 @@ function getComputerChoice(){
     }
 }
 
-function getHumanChoice(){
-    return prompt("Enter your choice")
-}
 function playRound(computerChoice,humanChoice){
-    if(humanChoice===null){
-        return
-    }
+
     humanChoice=humanChoice.toUpperCase();
     
     if(humanChoice===computerChoice){
-        return "It's a Draw !!"
+        return 0
     }else if(humanChoice==="ROCK"){
         if(computerChoice==="PAPER"){
             computerScore++
-            return `You lose! ${computerChoice} beats ${humanChoice} !`
+            return -1
         }else{
             humanScore++
-             return `You win! ${humanChoice} beats ${computerChoice} !`
+             return 1
         }
     }else if(humanChoice==="PAPER"){
         if(computerChoice==="SCISSORS"){
             computerScore++
-            return `You lose! ${computerChoice} beats ${humanChoice} !`
+            return -1
         }else{
             humanScore
-             return `You win! ${humanChoice} beats ${computerChoice} !`
+             return 1
         }
     }else if(humanChoice==="SCISSORS"){
         if(computerChoice==="ROCK"){
             computerScore++
-            return `You lose! ${computerChoice} beats ${humanChoice} !`
+            return -1
         }else{
             humanScore++
-             return `You win! ${humanChoice} beats ${computerChoice} !`
+             return 1
         }
-    }else{
-        return "Invalid Entry"
     }
 }
 
-function playGame(){
-    for(let i=0;i<5;++i){
-        let result=playRound(getComputerChoice(),getHumanChoice())
-        if(result===undefined){
-            console.log("User decided to exit mid game")
-            return
-        }
-        console.log(result)
-    }
-    if(humanScore===computerScore){
-        console.log("It's a DRAW !!!")
-    }else if(humanScore<computerScore){
-        console.log("You LOSE !!!")
-    }else{
-        console.log("You WIN !!!")
-    }
-}
+const rock=document.querySelector("#rock");
+const paper=document.querySelector("#paper");
+const scissors=document.querySelector("#scissors");
 
-playGame()
+rock.addEventListener('click',()=>{
+    console.log("rock clicked");
+    let computerChoice=getComputerChoice();
+    playRound(computerChoice,"rock");
+    const div=document.querySelector("div");
+    div.textContent=`Player Score : ${humanScore} \t Computer Score : ${computerScore}`;
+});
+
+paper.addEventListener('click',()=>{
+    console.log("paper clicked");
+    let computerChoice=getComputerChoice();
+    playRound(computerChoice,"paper");
+    const div=document.querySelector("div");
+    div.textContent=`Player Score : ${humanScore} \t Computer Score : ${computerScore}`;
+});
+
+scissors.addEventListener('click',()=>{
+    console.log("scissors clicked");
+    let computerChoice=getComputerChoice();
+    playRound(computerChoice,"scissors");
+    const div=document.querySelector("div");
+    div.textContent=`Player Score : ${humanScore} \t Computer Score : ${computerScore}`;
+});
+
+
